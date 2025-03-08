@@ -1,73 +1,63 @@
 # Web Content Diff Checker
 
-A tool to compare the current version of a web page with an archived version from the Wayback Machine, highlighting the differences in a user-friendly HTML report.
+A Python web application that compares current web content with archived versions from the Wayback Machine, highlighting the differences between them.
 
 ## Features
 
-- Fetches current web page content
-- Retrieves archived content from the Wayback Machine
-- Generates a visual diff showing what has changed
-- Highlights additions, removals, and modifications
-- Provides a summary of the most significant changes
-- Interactive controls to focus on changes or view all content
-- Responsive design for desktop and mobile viewing
+- Enter any URL to check for content changes
+- Compare current content with archived versions from the Wayback Machine
+- View highlighted differences directly in the web app
+- Search within the diff results
+- Focus on changes or view all content
+- Responsive design that works on desktop and mobile
 
-## Project Structure
+## How It Works
 
-```
-.
-├── main.py                # Main entry point
-├── web_fetcher.py         # Web content fetching functions
-├── diff_generator.py      # Diff generation functions
-├── utils.py               # Utility functions
-└── static/                # Static assets
-    ├── styles.css         # CSS styles
-    └── scripts.js         # JavaScript functionality
-```
+1. Enter a URL and optionally specify an archive date (in YYYYMMDD format)
+2. The app fetches the current content from the URL
+3. It also fetches the archived version from the Wayback Machine
+4. The app compares the two versions and generates a diff
+5. Differences are displayed in the web interface with additions, removals, and changes highlighted
 
-## Requirements
+## Technologies Used
 
-- Python 3.6+
-- Required packages:
-  - requests
-  - beautifulsoup4
-  - difflib (standard library)
+- Python 3.9+
+- Flask web framework
+- Requests for HTTP requests
+- BeautifulSoup for HTML parsing
+- difflib for generating diffs
+- HTML/CSS/JavaScript for the frontend
 
-## Installation
+## Deployment
+
+This application is designed to be deployed on Vercel. The `vercel.json` configuration file is included for easy deployment.
+
+### Deploying to Vercel
+
+1. Fork or clone this repository
+2. Connect your GitHub repository to Vercel
+3. Vercel will automatically detect the Python application and deploy it
+
+## Local Development
+
+To run the application locally:
 
 1. Clone the repository
-2. Create a virtual environment:
-   ```
-   python -m venv venv
-   ```
+2. Create a virtual environment: `python -m venv venv`
 3. Activate the virtual environment:
-   - On Windows: `venv\Scripts\activate`
-   - On macOS/Linux: `source venv/bin/activate`
-4. Install dependencies:
-   ```
-   pip install requests beautifulsoup4
-   ```
+   - Windows: `venv\Scripts\activate`
+   - macOS/Linux: `source venv/bin/activate`
+4. Install dependencies: `pip install -r requirements.txt`
+5. Run the application: `python app.py`
+6. Open your browser and navigate to `http://localhost:5000`
 
-## Usage
+## Original Application
 
-Run the script with:
+The original version of this application is archived in the `archive` directory. The new version maintains the same core functionality while adding the ability to:
 
-```
-python main.py
-```
-
-By default, it will compare the current version of the New York Fed website with an archived version from January 1, 2022.
-
-To customize the URL and timestamp, edit the variables in `main.py`:
-
-```python
-target_url = "https://your-url-here.com"
-timestamp = "YYYYMMDD"  # Format: Year, Month, Day
-```
-
-## Output
-
-The script generates an HTML file with the diff results and automatically opens it in your default web browser. The file is saved in the current directory with a name based on the domain and timestamps.
+- Enter URLs directly in the web interface
+- View diffs in the browser without generating HTML files
+- Provide a more interactive user experience
 
 ## License
 
