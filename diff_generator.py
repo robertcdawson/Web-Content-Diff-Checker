@@ -13,7 +13,7 @@ def generate_diff_content(current_text, archived_text, url, timestamp):
     formatted_archive_date, current_date = get_formatted_dates(timestamp)
     
     # Check if the archive date is today or in the future
-    archive_date = datetime.datetime.strptime(formatted_archive_date, "%Y-%m-%d").date()
+    archive_date = datetime.datetime.strptime(formatted_archive_date, "%m-%d-%Y").date()
     today = datetime.datetime.now().date()
     
     # Add a note if the date was adjusted
@@ -49,21 +49,19 @@ def generate_diff_content(current_text, archived_text, url, timestamp):
         'url': url,
         'archived_date': formatted_archive_date,
         'current_date': current_date,
+        'date_note': date_note,
+        'diff_data': diff_data,
         'significant_added': significant_added,
         'significant_removed': significant_removed,
-        'diff_data': diff_data,
         'stats': {
             'total_lines': len(diff_data),
             'added_lines': added_lines,
             'removed_lines': removed_lines,
             'changed_lines': changed_lines,
-            'is_identical': is_identical
+            'is_identical': is_identical,
+            'total_changes': added_lines + removed_lines + changed_lines
         }
     }
-    
-    # Add date note if present
-    if date_note:
-        response_data['date_note'] = date_note
     
     return response_data
 

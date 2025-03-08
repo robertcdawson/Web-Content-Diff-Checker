@@ -4,23 +4,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Web Content Diff Checker</title>
+  <title>Web Content Diff Checker - Compare web content changes over time</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta name="description"
+    content="Compare current web content with archived versions from the Wayback Machine to track changes over time.">
 </head>
 
 <body>
   <div class="container">
-    <header>
-      <h1>Web Content Diff Checker</h1>
-      <div class="summary">
-        <p>Compare current web content with archived versions from the Wayback Machine</p>
+    <header class="site-header">
+      <div class="header-content">
+        <h1>Web Content Diff Checker</h1>
+        <p class="tagline">Compare web content changes over time</p>
       </div>
     </header>
 
     <main>
+      <div class="app-description">
+        <p>Track how websites evolve by comparing current content with archived versions from the Wayback Machine.
+          Identify additions, removals, and changes to stay informed about content evolution.</p>
+      </div>
+
       <div class="input-form">
         <form id="diffForm" aria-labelledby="form-heading">
-          <h2 id="form-heading" class="visually-hidden">Content Comparison Form</h2>
+          <h2 id="form-heading">Start Comparing</h2>
           <div class="form-row">
             <div class="form-group url-group">
               <label for="url">URL to check:</label>
@@ -114,7 +124,8 @@
     </main>
 
     <footer>
-      <p>Web Content Diff Checker - Compare web content changes over time</p>
+      <p>&copy; 2024 Web Content Diff Checker | <a href="#" class="footer-link">Privacy Policy</a> | <a href="#"
+          class="footer-link">Terms of Use</a></p>
     </footer>
   </div>
 

@@ -27,8 +27,8 @@ def extract_significant_changes(archived_lines, current_lines):
 
 def get_formatted_dates(timestamp):
     """Format dates in a consistent, human-readable format."""
-    formatted_archive_date = f"{timestamp[0:4]}-{timestamp[4:6]}-{timestamp[6:8]}"
-    current_date = datetime.now().strftime('%Y-%m-%d')
+    formatted_archive_date = f"{timestamp[4:6]}-{timestamp[6:8]}-{timestamp[0:4]}"
+    current_date = datetime.now().strftime('%m-%d-%Y')
     return formatted_archive_date, current_date
 
 def create_filename(url, timestamp):
