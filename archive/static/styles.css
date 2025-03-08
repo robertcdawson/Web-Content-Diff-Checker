@@ -1,0 +1,334 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  margin: 0;
+  padding: 20px;
+  line-height: 1.5;
+  color: #333;
+  background-color: #f9f9f9;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  overflow: hidden;
+}
+
+header {
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #ddd;
+}
+
+h1 {
+  color: #2c3e50;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.8rem;
+}
+
+.summary {
+  margin: 20px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-left: 5px solid #0066cc;
+  border-radius: 4px;
+}
+
+.controls {
+  margin: 0 20px 20px;
+  position: sticky;
+  top: 0;
+  background: white;
+  padding: 10px 0;
+  z-index: 100;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.controls button {
+  padding: 8px 16px;
+  margin-right: 10px;
+  cursor: pointer;
+  background-color: #0066cc;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.controls button:hover {
+  background-color: #0055aa;
+}
+
+/* Search box */
+.search-box {
+  display: flex;
+  margin-left: auto;
+  margin-right: 10px;
+}
+
+.search-box input {
+  padding: 6px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px 0 0 4px;
+  width: 200px;
+}
+
+.search-box button {
+  margin-right: 0;
+  border-radius: 0 4px 4px 0;
+  padding: 6px 12px;
+}
+
+/* Search highlight */
+.search-highlight {
+  background-color: #ffff00;
+  color: #000;
+  padding: 2px 0;
+  border-radius: 2px;
+  font-weight: bold;
+}
+
+/* Row highlighting */
+.highlight-row {
+  background-color: #f0f7ff !important;
+}
+
+.scrolled-to {
+  background-color: #f0f7ff;
+  box-shadow: 0 0 5px rgba(0, 100, 200, 0.3);
+}
+
+.change-summary {
+  margin: 20px;
+  padding: 15px;
+  background-color: #f0f7ff;
+  border-radius: 5px;
+  border-left: 5px solid #0066cc;
+}
+
+.significant-changes h3 {
+  color: #333;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 5px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+.added-content, .removed-content {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 3px;
+}
+
+.added-content {
+  background-color: #effff0;
+  border-left: 3px solid #1e7f00;
+}
+
+.removed-content {
+  background-color: #fff0f0;
+  border-left: 3px solid #c80000;
+}
+
+.change-count {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* Diff container styling */
+.diff-container {
+  margin: 0 20px 20px 20px;
+  overflow-x: auto;
+  position: relative;
+}
+
+/* Modern grid-based layout */
+.diff-grid {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+  width: 100%;
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+.diff-header {
+  display: grid;
+  grid-template-columns: minmax(40px, auto) minmax(300px, 1fr) minmax(40px, auto) minmax(300px, 1fr);
+  background-color: #f0f0f0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 2px solid #ccc;
+}
+
+.diff-header>div {
+  padding: 10px;
+  font-weight: normal;
+  font-size: 14px;
+}
+
+.diff-body {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.diff-row {
+  display: grid;
+  grid-template-columns: minmax(40px, auto) minmax(300px, 1fr) minmax(40px, auto) minmax(300px, 1fr);
+  border-bottom: 1px solid #eee;
+}
+
+.diff-row:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+.line-number {
+  background-color: #f0f0f0;
+  color: #666;
+  text-align: right;
+  padding: 2px 4px;
+  font-family: 'SFMono-Regular', Consolas, monospace;
+  font-size: 12px;
+  min-width: 24px;
+  border-right: 1px solid #ccc;
+}
+
+.content {
+  padding: 5px 10px;
+  font-size: 13px;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.content-column {
+  padding: 5px 10px;
+  min-width: 300px;
+}
+
+/* Add visual indicators for changes */
+.diff-row:has(.diff_add) .content:nth-child(4) {
+  border-left: 3px solid #0d652d;
+}
+
+.diff-row:has(.diff_sub) .content:nth-child(2) {
+  border-left: 3px solid #a50e0e;
+}
+
+/* Highlight entire rows with changes */
+.diff-row:has(.diff_add), .diff-row:has(.diff_sub) {
+  background-color: #fafafa;
+}
+
+/* Enhanced styling for changes */
+.diff_add {
+  background-color: #dcf5e7;
+  color: #0d652d;
+  text-decoration: none;
+  padding: 2px 0;
+  border-radius: 2px;
+  position: relative;
+  display: inline-block;
+  font-weight: 500;
+  box-shadow: 0 0 0 1px rgba(30, 127, 0, 0.2);
+}
+
+.diff_chg {
+  background-color: #fff8c2;
+  color: #846504;
+  text-decoration: none;
+  padding: 2px 0;
+  border-radius: 2px;
+  position: relative;
+  display: inline-block;
+  font-weight: 500;
+  box-shadow: 0 0 0 1px rgba(132, 101, 4, 0.2);
+}
+
+.diff_sub {
+  background-color: #ffdad9;
+  color: #a50e0e;
+  text-decoration: none;
+  padding: 2px 0;
+  border-radius: 2px;
+  position: relative;
+  display: inline-block;
+  font-weight: 500;
+  box-shadow: 0 0 0 1px rgba(200, 0, 0, 0.2);
+}
+
+footer {
+  padding: 15px 20px;
+  font-size: 12px;
+  color: #666;
+  text-align: center;
+  border-top: 1px solid #ddd;
+}
+
+/* Fix for the anchor styling that might cause single-letter links */
+a.diff_link {
+  color: inherit;
+  text-decoration: none;
+  pointer-events: none;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+
+  .container {
+    border-radius: 5px;
+  }
+
+  h1 {
+    font-size: 1.4rem;
+  }
+
+  .controls button {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+  }
+
+  table.diff td {
+    font-size: 12px;
+  }
+
+  .summary, .change-summary, .controls, .diff-container {
+    margin: 10px;
+  }
+
+  .diff-container {
+    position: relative;
+  }
+
+  .diff-container::after {
+    content: "⟷";
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 5px 8px;
+    border-radius: 50%;
+    opacity: 0.7;
+    pointer-events: none;
+  }
+
+  /* Hide the scroll indicator when not needed */
+  .diff-container:not(.scrollable)::after {
+    display: none;
+  }
+}

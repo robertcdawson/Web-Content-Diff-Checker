@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Content Diff Checker</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>Web Content Diff Checker</h1>
+      <div class="summary">
+        <p>Compare current web content with archived versions from the Wayback Machine</p>
+      </div>
+    </header>
+
+    <main>
+      <div class="input-form">
+        <form id="diffForm" aria-labelledby="form-heading">
+          <h2 id="form-heading" class="visually-hidden">Content Comparison Form</h2>
+          <div class="form-row">
+            <div class="form-group url-group">
+              <label for="url">URL to check:</label>
+              <input type="url" id="url" name="url" placeholder="https://example.com/page" aria-required="true"
+                required>
+            </div>
+            <div class="form-group date-group">
+              <label for="archiveDate">Archive date:</label>
+              <div class="custom-date-input">
+                <select id="archiveMonth" aria-label="Month">
+                  <option value="01">January</option>
+                  <option value="02">February</option>
+                  <option value="03">March</option>
+                  <option value="04">April</option>
+                  <option value="05">May</option>
+                  <option value="06">June</option>
+                  <option value="07">July</option>
+                  <option value="08">August</option>
+                  <option value="09">September</option>
+                  <option value="10">October</option>
+                  <option value="11">November</option>
+                  <option value="12">December</option>
+                </select>
+                <select id="archiveDay" aria-label="Day">
+                  <!-- Will be populated by JavaScript -->
+                </select>
+                <select id="archiveYear" aria-label="Year">
+                  <!-- Will be populated by JavaScript -->
+                </select>
+              </div>
+              <div id="date-description" class="date-description">
+                Select a date to compare with the current version. Dates cannot be later than yesterday.
+              </div>
+              <input type="hidden" id="archiveDate" name="archiveDate">
+              <input type="hidden" id="timestamp" name="timestamp">
+            </div>
+          </div>
+          <div class="form-group button-group">
+            <button type="submit" id="generateBtn">Generate Diff</button>
+          </div>
+        </form>
+      </div>
+
+      <div id="loading" class="loading hidden" role="status" aria-live="polite">
+        <div class="spinner" aria-hidden="true"></div>
+        <p>Fetching content and generating diff...</p>
+      </div>
+
+      <div id="errorMessage" class="error-message hidden" role="alert" aria-live="assertive"></div>
+
+      <div id="diffResults" class="hidden">
+        <div class="change-summary">
+          <div id="diffInfo" class="diff-info"></div>
+          <div class="change-count">
+            <p id="changeStats"></p>
+          </div>
+          <div class="significant-changes">
+            <h3>Key Additions:</h3>
+            <div class="added-content">
+              <ul id="keyAdditions"></ul>
+            </div>
+            <h3>Key Removals:</h3>
+            <div class="removed-content">
+              <ul id="keyRemovals"></ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="controls">
+          <button id="toggleChangesBtn" aria-pressed="false"
+            title="Toggle between showing all content or only changes">Focus on Changes</button>
+          <div class="search-box" role="search">
+            <label for="searchInput" class="visually-hidden">Search in diff</label>
+            <input type="text" id="searchInput" placeholder="Search in diff...">
+            <button id="searchBtn" aria-label="Search">Search</button>
+          </div>
+        </div>
+
+        <div class="diff-container">
+          <div class="diff-grid" role="table" aria-label="Content differences">
+            <div class="diff-header" role="rowgroup">
+              <div class="line-number" role="columnheader">Line</div>
+              <div class="content-column" id="oldVersionHeader" role="columnheader">Archived Version</div>
+              <div class="line-number" role="columnheader">Line</div>
+              <div class="content-column" id="newVersionHeader" role="columnheader">Current Version</div>
+            </div>
+            <div class="diff-body" id="diffContent" role="rowgroup"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>Web Content Diff Checker - Compare web content changes over time</p>
+    </footer>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+
+</html>
